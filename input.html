@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>お客様情報入力</title>
+</head>
+<body>
+  <h1>お客様情報入力</h1>
+
+  <form id="infoForm">
+    <label>アレルギー情報（複数選択可）:<br>
+      <input type="checkbox" name="allergy" value="乳">乳<br>
+      <input type="checkbox" name="allergy" value="卵">卵<br>
+      <input type="checkbox" name="allergy" value="小麦">小麦<br>
+      <input type="checkbox" name="allergy" value="魚介">魚介類<br>
+      <input type="checkbox" name="allergy" value="ナッツ類">ナッツ類<br>
+      <input type="checkbox" name="allergy" value="大豆">大豆<br>
+      <input type="checkbox" name="allergy" value="豚">豚<br>
+      <input type="checkbox" name="allergy" value="豆">豆<br>
+    </label>
+    <br><br>
+
+    <label>目標カロリー（kcal）: 
+      <input type="number" id="calories" required>
+    </label>
+    <br><br>
+
+    <label>予算（円）: 
+      <input type="number" id="budget" required>
+    </label>
+    <br><br>
+
+    <button type="submit">メニューを表示</button>
+  </form>
+
+  <script>
+    document.getElementById('infoForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const allergies = Array.from(document.querySelectorAll('input[name="allergy"]:checked')).map(el => el.value);
+      const calories = document.getElementById('calories').value;
+      const budget = document.getElementById('budget').value;
+
+      localStorage.setItem('allergies', JSON.stringify(allergies));
+      localStorage.setItem('calories', calories);
+      localStorage.setItem('budget', budget);
+
+      window.location.href = 'menu.html';
+    });
+  </script>
+</body>
+</html>
